@@ -72,11 +72,15 @@ class CharacterListAdapter(val activity: Activity): RecyclerView.Adapter<Recycle
             getItems(data.size)
         }
 
+        if(getItemViewType(index) == TYPE_ITEM) {
+            val element = data[index]
+            val characterHolder = viewHolder as CharacterItemViewHolder
 
-        val element = data[index]
-        val characterHolder = viewHolder as CharacterItemViewHolder
-
-        characterHolder.characterNameView.text = element.name
-        characterHolder.publisherNameView.text = element.publisher?.name?:"Publisher Name"
+            characterHolder.characterNameView.text = element.name
+            characterHolder.publisherNameView.text = element.publisher?.name ?: "Publisher Name"
+        } else {
+            val footerHolder = viewHolder as FooterViewHolder
+            footerHolder.countView.text = data.size.toString(16)
+        }
     }
 }
