@@ -20,7 +20,8 @@ class CharacterListAdapter(val activity: Activity): RecyclerView.Adapter<Recycle
     }
 
     private fun getItems(offset: Int = 0, limit:Int = ITEMS_PER_QUERY) {
-        ComicDao.getCharacters(object : ComicDao.CharactersCallback {
+        ComicDao.getCharacters(offset = offset, limit = limit,
+            callback = object : ComicDao.CharactersCallback {
             override fun callback(list: List<Character>) {
                 data.addAll(list)
                 activity.runOnUiThread { notifyDataSetChanged() }
@@ -43,6 +44,11 @@ class CharacterListAdapter(val activity: Activity): RecyclerView.Adapter<Recycle
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, index: Int) {
+        if(index == data.size - 5) {
+            getItems(data.size)
+        }
+
+
         val element = data[index]
         val characterHolder = viewHolder as CharacterItemViewHolder
 
