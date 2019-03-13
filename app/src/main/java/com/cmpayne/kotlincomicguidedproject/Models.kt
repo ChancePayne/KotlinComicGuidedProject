@@ -46,7 +46,7 @@ data class Publisher(val api_detail_url: String? = "", val id: Int? = -1, val na
 data class Character(
     val aliases: String? = "",
     val api_detail_url: String? = "",
-    val birth: Any? = -1,
+    val birth: String? = "",
     val count_of_issue_appearances: Int? = -1,
     val date_added: String? = "",
     val date_last_updated: String? = "",

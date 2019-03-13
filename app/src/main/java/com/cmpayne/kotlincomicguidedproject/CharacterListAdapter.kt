@@ -2,12 +2,18 @@ package com.cmpayne.kotlincomicguidedproject
 
 import android.app.Activity
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
 class CharacterListAdapter(val activity: Activity): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    class CharacterItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
+        val characterNameView: TextView = view.findViewById(R.id.item_character_name)
+        val publisherNameView: TextView = view.findViewById(R.id.item_publisher_name)
+    }
 
     companion object {
         const val ITEMS_PER_QUERY = 10
@@ -20,6 +26,7 @@ class CharacterListAdapter(val activity: Activity): RecyclerView.Adapter<Recycle
     }
 
     private fun getItems(offset: Int = 0, limit:Int = ITEMS_PER_QUERY) {
+        Log.i("ListAdapter", "Querying offset $offset")
         ComicDao.getCharacters(offset = offset, limit = limit,
             callback = object : ComicDao.CharactersCallback {
             override fun callback(list: List<Character>) {
@@ -27,11 +34,6 @@ class CharacterListAdapter(val activity: Activity): RecyclerView.Adapter<Recycle
                 activity.runOnUiThread { notifyDataSetChanged() }
             }
         })
-    }
-
-    class CharacterItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        val characterNameView: TextView = view.findViewById(R.id.item_character_name)
-        val publisherNameView: TextView = view.findViewById(R.id.item_publisher_name)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
