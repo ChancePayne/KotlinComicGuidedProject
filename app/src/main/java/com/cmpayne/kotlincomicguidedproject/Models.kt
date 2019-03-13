@@ -1,58 +1,66 @@
 package com.cmpayne.kotlincomicguidedproject
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class CharacterList(
-    val error: String?,
-    val limit: Number?,
-    val offset: Number?,
-    val number_of_page_results: Number?,
-    val number_of_total_results: Number?,
-    val status_code: Number?,
-    val results: List<Character>?,
-    val version: String?
+    val error: String? = "",
+    val limit: Number? = -1,
+    val offset: Number? = -1,
+    val number_of_page_results: Number? = -1,
+    val number_of_total_results: Number? = -1,
+    val status_code: Number? = -1,
+    val results: List<Character>? = listOf(Character()),
+    val version: String? = ""
 )
 
+@Serializable
 data class FirstAppearedInIssue(
-    val api_detail_url: String?,
-    val id: Number?,
-    val name: String?,
-    val issue_number: String?
+    val api_detail_url: String? = "",
+    val id: Number? = -1,
+    val name: String? = "",
+    val issue_number: String? = ""
 )
 
+@Serializable
 data class Image(
-    val icon_url: String?,
-    val medium_url: String?,
-    val screen_url: String?,
-    val screen_large_url: String?,
-    val small_url: String?,
-    val super_url: String?,
-    val thumb_url: String?,
-    val tiny_url: String?,
-    val original_url: String?,
-    val image_tags: String?
+    val icon_url: String? = "",
+    val medium_url: String? = "",
+    val screen_url: String? = "",
+    val screen_large_url: String? = "",
+    val small_url: String? = "",
+    val super_url: String? = "",
+    val thumb_url: String? = "",
+    val tiny_url: String? = "",
+    val original_url: String? = "",
+    val image_tags: String? = ""
 )
 
-data class Origin(val api_detail_url: String?, val id: Number?, val name: String?)
+@Serializable
+data class Origin(val api_detail_url: String? = "", val id: Number? = -1, val name: String? = "")
 
-data class Publisher(val api_detail_url: String?, val id: Number?, val name: String?)
+@Serializable
+data class Publisher(val api_detail_url: String? = "", val id: Number? = -1, val name: String? = "")
 
+@Serializable
 data class Character(
-    val aliases: String?,
-    val api_detail_url: String?,
-    val birth: Any?,
-    val count_of_issue_appearances: Number?,
-    val date_added: String?,
-    val date_last_updated: String?,
-    val deck: String?,
-    val description: String?,
-    val first_appearedInIssue: FirstAppearedInIssue?,
-    val gender: Number?,
-    val id: Number?,
-    val image: Image?,
-    val name: String?,
-    val origin: Origin?,
-    val publisher: Publisher?,
-    val real_name: String?,
-    val site_detail_url: String?
+    val aliases: String? = "",
+    val api_detail_url: String? = "",
+    val birth: Any? = -1,
+    val count_of_issue_appearances: Number? = -1,
+    val date_added: String? = "",
+    val date_last_updated: String? = "",
+    val deck: String? = "",
+    val description: String? = "",
+    val first_appearedInIssue: FirstAppearedInIssue? = FirstAppearedInIssue(),
+    val gender: Number? = -1,
+    val id: Number? = -1,
+    val image: Image? = Image(),
+    val name: String? = "",
+    val origin: Origin? = Origin(),
+    val publisher: Publisher? = Publisher(),
+    val real_name: String? = "",
+    val site_detail_url: String? = ""
 )
 
 /*
