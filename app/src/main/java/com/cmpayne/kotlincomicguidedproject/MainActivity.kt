@@ -1,7 +1,10 @@
 package com.cmpayne.kotlincomicguidedproject
 
+import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -27,11 +30,23 @@ fun libraryTest() {
 
 class MainActivity : AppCompatActivity() {
 
+//    private var viewManager: LinearLayoutManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val jsonString = "{\n" +
+        val viewAdapter = CharacterListAdapter(this)
+        val viewManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
+        findViewById<RecyclerView>(R.id.recycler_view).apply {
+            setHasFixedSize(false)
+
+            layoutManager = viewManager
+
+            adapter = viewAdapter
+        }
+
+        /*val jsonString = "{\n" +
                 "    \"error\": \"OK\",\n" +
                 "    \"limit\": 1,\n" +
                 "    \"offset\": 0,\n" +
@@ -90,6 +105,6 @@ class MainActivity : AppCompatActivity() {
         println(list)
 
 //        val stringified = Json.stringify(CharacterList.serializer(), CharacterList())
-//        println(stringified)
+//        println(stringified)*/
     }
 }
