@@ -7,7 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-class CharacterListAdapter(val activity: Activity, val data: List<Character>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CharacterListAdapter(val activity: Activity): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    val data = mutableListOf<Character>()
+    init {
+        ComicDao.getCharacters(object : ComicDao.CharactersCallback {
+            override fun callback(list: List<Character>) {
+                data.addAll(list)
+                activity.runOnUiThread { notifyDataSetChanged() }
+            }
+        })
+    }
 
     class CharacterItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val characterNameView: TextView = view.findViewById(R.id.item_character_name)
