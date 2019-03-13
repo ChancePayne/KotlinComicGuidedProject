@@ -9,8 +9,17 @@ import android.widget.TextView
 
 class CharacterListAdapter(val activity: Activity): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    companion object {
+        const val ITEMS_PER_QUERY = 10
+    }
+
     val data = mutableListOf<Character>()
+
     init {
+        getItems()
+    }
+
+    private fun getItems(offset: Int = 0, limit:Int = ITEMS_PER_QUERY) {
         ComicDao.getCharacters(object : ComicDao.CharactersCallback {
             override fun callback(list: List<Character>) {
                 data.addAll(list)
