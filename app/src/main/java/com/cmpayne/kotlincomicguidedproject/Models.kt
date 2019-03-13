@@ -5,11 +5,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CharacterList(
     val error: String? = "",
-    val limit: Number? = -1,
-    val offset: Number? = -1,
-    val number_of_page_results: Number? = -1,
-    val number_of_total_results: Number? = -1,
-    val status_code: Number? = -1,
+    val limit: Int? = -1,
+    val offset: Int? = -1,
+    val number_of_page_results: Int? = -1,
+    val number_of_total_results: Int? = -1,
+    val status_code: Int? = -1,
     val results: List<Character>? = listOf(Character()),
     val version: String? = ""
 )
@@ -17,7 +17,7 @@ data class CharacterList(
 @Serializable
 data class FirstAppearedInIssue(
     val api_detail_url: String? = "",
-    val id: Number? = -1,
+    val id: Int? = -1,
     val name: String? = "",
     val issue_number: String? = ""
 )
@@ -37,24 +37,24 @@ data class Image(
 )
 
 @Serializable
-data class Origin(val api_detail_url: String? = "", val id: Number? = -1, val name: String? = "")
+data class Origin(val api_detail_url: String? = "", val id: Int? = -1, val name: String? = "")
 
 @Serializable
-data class Publisher(val api_detail_url: String? = "", val id: Number? = -1, val name: String? = "")
+data class Publisher(val api_detail_url: String? = "", val id: Int? = -1, val name: String? = "")
 
 @Serializable
 data class Character(
     val aliases: String? = "",
     val api_detail_url: String? = "",
     val birth: Any? = -1,
-    val count_of_issue_appearances: Number? = -1,
+    val count_of_issue_appearances: Int? = -1,
     val date_added: String? = "",
     val date_last_updated: String? = "",
     val deck: String? = "",
     val description: String? = "",
-    val first_appearedInIssue: FirstAppearedInIssue? = FirstAppearedInIssue(),
-    val gender: Number? = -1,
-    val id: Number? = -1,
+    val first_appeared_in_issue: FirstAppearedInIssue? = FirstAppearedInIssue(),
+    val gender: Int? = -1,
+    val id: Int? = -1,
     val image: Image? = Image(),
     val name: String? = "",
     val origin: Origin? = Origin(),

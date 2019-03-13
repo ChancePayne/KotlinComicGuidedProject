@@ -86,9 +86,10 @@ class MainActivity : AppCompatActivity() {
                 "    \"version\": \"1.0\"\n" +
                 "}"
 
-//        val list = Json.parse(CharacterList.serializer(), jsonString)
-//        println(list)
+        val list = Json.parse(CharacterList.serializer(), jsonString)
+        println(list)
 
-        val stringified = Json.stringify(CharacterList.serializer(), CharacterList())
+//        val stringified = Json.stringify(CharacterList.serializer(), CharacterList())
+//        println(stringified)
     }
 }
