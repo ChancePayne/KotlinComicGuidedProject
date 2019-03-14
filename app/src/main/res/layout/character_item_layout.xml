@@ -1,25 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:padding="15dp"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="wrap_content">
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        app:cardElevation="@dimen/cardview_default_elevation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardUseCompatPadding="true"
+        card_view:cardCornerRadius="4dp">
 
-    <TextView
-            android:text="Character"
-            android:layout_marginEnd="15dp"
+    <LinearLayout
+            android:layout_margin="5dp"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/item_character_name" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toStartOf="@+id/item_publisher_name"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
-    <TextView
-            android:text="Publisher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/item_publisher_name"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/item_character_name" app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toEndOf="parent"/>
-</android.support.constraint.ConstraintLayout>
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:id="@+id/item_character_image"
+                android:src="@drawable/ic_action_name"
+                android:layout_width="106dp"
+                android:adjustViewBounds="true"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:text="Character"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_character_name"
+                android:textAlignment="center"
+                tools:layout_editor_absoluteY="15dp" tools:layout_editor_absoluteX="97dp"/>
+
+
+        <TextView
+                android:text="Publisher"
+                android:layout_width="match_parent"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_publisher_name"
+                tools:layout_editor_absoluteY="15dp" tools:layout_editor_absoluteX="256dp"/>
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
