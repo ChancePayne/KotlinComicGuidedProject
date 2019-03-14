@@ -1,5 +1,6 @@
 package com.cmpayne.kotlincomicguidedproject
 
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -31,6 +32,8 @@ class CharacterListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val data = mutableListOf<Character>()
 
+    private val adapter = this
+
     init {
         getItems()
     }
@@ -38,10 +41,17 @@ class CharacterListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private fun getItems(offset: Int = 0, limit:Int = ITEMS_PER_QUERY) {
         Log.i("ListAdapter", "Querying offset $offset")
         dataScope.launch {
+            val oldData = mutableListOf<Character>()
+            oldData.addAll(data)
+
             val list = ComicDao.getCharacters(offset = offset, limit = limit)
             data.addAll(list)
+
+            val diffResult = DiffUtil.calculateDiff(CharacterDiffTool(oldData, data))
+
             withContext(Dispatchers.Main) {
-                notifyDataSetChanged()
+//                notifyDataSetChanged()
+                diffResult.dispatchUpdatesTo(adapter)
             }
         }
         /*ComicDao.getCharacters(offset = offset, limit = limit,
@@ -92,5 +102,23 @@ class CharacterListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val footerHolder = viewHolder as FooterViewHolder
             footerHolder.countView.text = data.size.toString()
         }
+    }
+}
+
+class CharacterDiffTool(private val oldData: List<Character>, private val newData: List<Character>): DiffUtil.Callback() {
+    override fun areItemsTheSame(p0: Int, p1: Int): Boolean {
+        return oldData[p0].id == newData[p1].id
+    }
+
+    override fun getOldListSize(): Int {
+        return oldData.size
+    }
+
+    override fun getNewListSize(): Int {
+        return newData.size
+    }
+
+    override fun areContentsTheSame(p0: Int, p1: Int): Boolean {
+        return oldData[p0] == newData[p1]
     }
 }

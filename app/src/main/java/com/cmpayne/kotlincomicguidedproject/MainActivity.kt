@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        MainScope().launch {
+        /*MainScope().launch {
             withContext(Dispatchers.IO) {
                 val tokenRequest = NetworkAdapter.httpRequest(
                     "https://api.thetvdb.com/login", "POST",
@@ -65,9 +65,9 @@ class MainActivity : AppCompatActivity() {
                 )
                 Log.i("Authentication", result)
             }
-        }
+        }*/
 
-        /*val viewAdapter = CharacterListAdapter(this)
+        val viewAdapter = CharacterListAdapter()
         val viewManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
         findViewById<RecyclerView>(R.id.recycler_view).apply {
             setHasFixedSize(false)
@@ -75,6 +75,6 @@ class MainActivity : AppCompatActivity() {
             layoutManager = viewManager
 
             adapter = viewAdapter
-        }*/
+        }
     }
 }
