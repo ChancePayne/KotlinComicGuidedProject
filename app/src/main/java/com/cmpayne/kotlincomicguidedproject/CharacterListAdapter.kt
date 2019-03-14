@@ -1,14 +1,14 @@
 package com.cmpayne.kotlincomicguidedproject
 
-import android.app.Activity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import kotlinx.coroutines.*
 
-class CharacterListAdapter(val activity: Activity): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CharacterListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class CharacterItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val characterNameView: TextView = view.findViewById(R.id.item_character_name)
@@ -26,7 +26,10 @@ class CharacterListAdapter(val activity: Activity): RecyclerView.Adapter<Recycle
         const val TYPE_ITEM = 1
     }
 
-    val data = mutableListOf<Character>()
+    private val dataJob = Job()
+    private val dataScope = CoroutineScope(Dispatchers.IO + dataJob)
+
+    private val data = mutableListOf<Character>()
 
     init {
         getItems()
@@ -34,13 +37,20 @@ class CharacterListAdapter(val activity: Activity): RecyclerView.Adapter<Recycle
 
     private fun getItems(offset: Int = 0, limit:Int = ITEMS_PER_QUERY) {
         Log.i("ListAdapter", "Querying offset $offset")
-        ComicDao.getCharacters(offset = offset, limit = limit,
+        dataScope.launch {
+            val list = ComicDao.getCharacters(offset = offset, limit = limit)
+            data.addAll(list)
+            withContext(Dispatchers.Main) {
+                notifyDataSetChanged()
+            }
+        }
+        /*ComicDao.getCharacters(offset = offset, limit = limit,
             callback = object : ComicDao.CharactersCallback {
             override fun callback(list: List<Character>) {
                 data.addAll(list)
                 activity.runOnUiThread { notifyDataSetChanged() }
             }
-        })
+        })*/
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -80,7 +90,7 @@ class CharacterListAdapter(val activity: Activity): RecyclerView.Adapter<Recycle
             characterHolder.publisherNameView.text = element.publisher?.name ?: "Publisher Name"
         } else {
             val footerHolder = viewHolder as FooterViewHolder
-            footerHolder.countView.text = data.size.toString(16)
+            footerHolder.countView.text = data.size.toString()
         }
     }
 }
