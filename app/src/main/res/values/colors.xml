@@ -3,4 +3,10 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="lambdaRed">#bb1333</color>
+    <color name="lambdaBlue">#0c3c78</color>
+    <color name="lambdaBlueDark">#1a61b0</color>
+    <color name="lambdaBlueLight">#3ab5e5</color>
+    <color name="lambdaGray">#55596d</color>
 </resources>

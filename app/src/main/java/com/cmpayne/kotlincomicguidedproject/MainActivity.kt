@@ -1,26 +1,28 @@
 package com.cmpayne.kotlincomicguidedproject
 
-import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.view.View
-import android.widget.Button
+import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
 import org.json.JSONObject
 
 @Serializable
 data class Data(val a: Int, @Optional val b: String = "42")
 
-fun libraryTest() {
+
+
+
+/*fun libraryTest() {
     // serializing objects
     val jsonData = Json.stringify(Data.serializer(), Data(42))
     // serializing lists
@@ -31,7 +33,7 @@ fun libraryTest() {
     // parsing data back
     val obj = Json.parse(Data.serializer(), """{"a":42}""")
     println(obj) // Data(a=42, b="42")
-}
+}*/
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,7 +43,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        /*MainScope().launch {
+        getColor(R.color.colorAccent)
+
+        resources.getColor(R.color.colorAccent)
+
+
+        val my_text_view = TextView(this)
+        val color = ContextCompat.getColor(
+            this, R.color.colorAccent)
+        my_text_view.setBackgroundColor(color)
+
+
+        ContextCompat.getDrawable(this, R.drawable.tooltip_frame_dark)
+
+        MainScope().launch {
             withContext(Dispatchers.IO) {
                 val tokenRequest = NetworkAdapter.httpRequest(
                     "https://api.thetvdb.com/login", "POST",
@@ -65,11 +80,12 @@ class MainActivity : AppCompatActivity() {
                 )
                 Log.i("Authentication", result)
             }
-        }*/
+        }
 
         val viewAdapter = CharacterListAdapter()
         val viewManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
-        findViewById<RecyclerView>(R.id.recycler_view).apply {
+//        findViewById<RecyclerView>(R.id.recycler_view).apply {
+        recycler_view.apply {
             setHasFixedSize(false)
 
             layoutManager = viewManager
